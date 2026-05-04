@@ -6,6 +6,7 @@ on:
     tags:
       - "v*.*.*"
 
+
 jobs:
   build:
     name: "v${{ matrix.build_env.tag }} - ${{ matrix.build_env.pkgarch}} :: ${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}} build"
@@ -101,7 +102,16 @@ jobs:
 
           make V=s package/amneziawg-tools/{clean,download,prepare}
           make V=s package/amneziawg-tools/compile
+      - name: DEBUG - find packages
+        run: |
+            echo "==== ALL IPK FILES ===="
+            find bin -name "*.ipk" || true
 
+            echo "==== AWG DIR ===="
+            ls -la bin/packages/${{ matrix.build_env.pkgarch }}/ || true
+
+            echo "==== TARGET DIR ===="
+            ls -la bin/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/ || true
       - name: Prepare artifacts
         run: |
           tag_name=${{  github.ref_name }}
