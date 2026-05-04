@@ -15,7 +15,7 @@ jobs:
           - tag: "22.03.3"
             pkgarch: mips_24kc
             target: ath79
-            subtarget: generic          # ← важно! не nand
+            subtarget: generic          # ← важно! не   nand
             vermagic: "597dfd90b9cbdd7e9f0f4cbf4279a279"
 
     steps:
